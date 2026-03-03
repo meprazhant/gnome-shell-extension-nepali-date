@@ -1,0 +1,14 @@
+{
+    "uuid": "nepali-date@prashant",
+    "name": "Nepali Date",
+    "description": "Displays the Bikram Sambat (Nepali) date in the top bar.",
+    "shell-version": [
+        "45",
+        "46",
+        "47",
+        "48"
+    ],
+    "url": "https://github.com/meprazhant/gnome-shell-extension-nepali-date",
+    "version": 1,
+    "settings-schema": "org.gnome.shell.extensions.nepalidate"
+}

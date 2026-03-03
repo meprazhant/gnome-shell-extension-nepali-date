@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+    <enum id="org.gnome.shell.extensions.nepalidate.DateFormat">
+        <value nick="full" value="0"/>
+        <value nick="short" value="1"/>
+        <value nick="numeric" value="2"/>
+    </enum>
+
+    <schema id="org.gnome.shell.extensions.nepalidate" path="/org/gnome/shell/extensions/nepalidate/">
+        <key name="use-nepali-numerals" type="b">
+            <default>true</default>
+            <summary>Use Nepali numerals</summary>
+            <description>Toggle between 0-9 and ०-९.</description>
+        </key>
+        <key name="date-format" enum="org.gnome.shell.extensions.nepalidate.DateFormat">
+            <default>'full'</default>
+            <summary>Date format</summary>
+            <description>Select the display format for the Nepali date.</description>
+        </key>
+    </schema>
+</schemalist>
