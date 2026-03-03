@@ -1,0 +1,50 @@
+.nepali-calendar-container {
+  padding: 16px;
+  background-color: transparent;
+}
+
+.calendar-header {
+  margin-bottom: 12px;
+}
+
+.calendar-month-label {
+  font-weight: bold;
+  font-size: 1.1em;
+  text-align: center;
+}
+
+.calendar-nav-button {
+  padding: 4px 12px;
+  border-radius: 6px;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.calendar-nav-button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.calendar-day-header {
+  font-weight: bold;
+  color: #9a9996;
+  font-size: 0.9em;
+  padding: 4px;
+  text-align: center;
+}
+
+.calendar-day {
+  padding: 8px;
+  border-radius: 50%;
+  text-align: center;
+  transition: background-color 0.2s;
+}
+
+.calendar-day:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.calendar-day-today {
+  background-color: #3584e4;
+  color: white;
+  font-weight: bold;
+  border-radius: 50%;
+}

@@ -1,23 +1,34 @@
 import { Extension } from 'resource:///org/gnome/shell/extensions/extension.js';
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
+import * as PanelMenu from 'resource:///org/gnome/shell/ui/panelMenu.js';
 import St from 'gi://St';
 import Clutter from 'gi://Clutter';
 import GLib from 'gi://GLib';
 import Gio from 'gi://Gio';
 import { formatBSDate } from './lib/formatter.js';
-
+import { CalendarView } from './lib/calendar.js';
 
 export default class NepaliDateExtension extends Extension {
     enable() {
         this._settings = this.getSettings();
+        
+        // Create the PanelMenu Button
+        this._indicator = new PanelMenu.Button(0.5, this.metadata.name, false);
+
+        // Add the label to the indicator
         this._label = new St.Label({
             text: '...',
             y_align: Clutter.ActorAlign.CENTER,
             style_class: 'panel-button'
         });
+        this._indicator.add_child(this._label);
 
-        // Insert into the right box, next to the clock
-        Main.panel._rightBox.insert_child_at_index(this._label, 0);
+        // Create and add the CalendarView to the menu
+        this._calendarView = new CalendarView(this);
+        this._indicator.menu.box.add_child(this._calendarView);
+
+        // Insert into the panel
+        Main.panel.addToStatusArea(this.uuid, this._indicator, 0, 'right');
 
         // Update the date
         this._updateDate();
@@ -34,9 +45,9 @@ export default class NepaliDateExtension extends Extension {
         });
 
         // Add tooltip showing AD date
-        this._label.connect('enter-event', () => {
+        this._indicator.connect('enter-event', () => {
             const now = new Date();
-            this._label.set_tooltip_text(`AD: ${now.toDateString()}`);
+            this._indicator.set_tooltip_text(`AD: ${now.toDateString()}`);
         });
     }
 
@@ -51,10 +62,11 @@ export default class NepaliDateExtension extends Extension {
             this._settingsChangedId = null;
         }
 
-        if (this._label) {
-            Main.panel._rightBox.remove_child(this._label);
-            this._label.destroy();
+        if (this._indicator) {
+            this._indicator.destroy();
+            this._indicator = null;
             this._label = null;
+            this._calendarView = null;
         }
 
         this._settings = null;
@@ -66,12 +78,12 @@ export default class NepaliDateExtension extends Extension {
         const useNepaliNumerals = this._settings.get_boolean('use-nepali-numerals');
         const dateStr = formatBSDate(now, formatType, useNepaliNumerals);
 
-        this._label.set_text(dateStr);
+        if (this._label) {
+            this._label.set_text(dateStr);
+        }
     }
 
     _getDateFormat() {
-        // Enums are returned as integers from GSettings if defined with nicknames in schema
-        const val = this._settings.get_string('date-format');
-        return val;
+        return this._settings.get_string('date-format');
     }
 }
