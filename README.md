@@ -5,8 +5,8 @@
 
 A production-ready GNOME Shell extension that displays the **Nepali (Bikram Sambat)** date directly in your top panel.
 
-![Screenshot](https://i.ibb.co/YF3LGpm5/image.png)
-![Screenshot](https://i.ibb.co/6Rn2vg9W/image.png)
+![Screenshot](/res/sc.png)
+![Screenshot](/res/sc2.png)
 
 ## ✨ Features
 
